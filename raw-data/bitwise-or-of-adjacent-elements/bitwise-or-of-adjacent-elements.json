@@ -1,0 +1,109 @@
+{
+    "problem_type": "DSA",
+    "problem_id": "_bitwise_or_of_adjacent_elements",
+    "problem_slug": "bitwise-or-of-adjacent-elements",
+    "problem_name": " Bitwise OR of Adjacent Elements",
+    "subject_name": null,
+    "subject_slug": null,
+    "cat_id": null,
+    "subcatid": null,
+    "rank": null,
+    "hasIDE": 1,
+    "points": 100,
+    "problem_statement": "<p>Given an array&nbsp;nums&nbsp;of length&nbsp;n, return an array&nbsp;answer&nbsp;of length&nbsp;n - 1&nbsp;such that&nbsp;answer[i] = nums[i] | nums[i + 1]&nbsp;where&nbsp;|&nbsp;is the bitwise&nbsp;OR&nbsp;operation.</p>",
+    "example1": "<p><strong>Input:</strong>&nbsp;nums = [1,3,7,15]</p><p><strong>Output:</strong>&nbsp;[3,7,15]</p>",
+    "example2": "<p><strong>Input:</strong>&nbsp;nums = [8,4,2]</p><p><strong>Output:</strong>&nbsp;[12,6]</p>",
+    "example3": "<p><strong>Input:</strong>&nbsp;nums = [1,2,4,8]</p>",
+    "constraints": "<ul><li>2 &lt;= nums.length &lt;= 100</li><li>0 &lt;= nums[i]&nbsp;&lt;= 100</li></ul><p><br></p>",
+    "topics": null,
+    "company_tags": null,
+    "languages_supported": null,
+    "misc": {
+        "tags": [
+            "Adobe"
+        ],
+        "facts": "",
+        "hints": [
+            {
+                "hint": "For each index i, compute the OR operation between nums[i] and nums[i + 1] using the | operator. Iterate through the array from index 0 to n - 2 and compute the result directly into a new array."
+            },
+            {
+                "hint": "Since you're comparing every pair of adjacent elements, your final result will always have one less element than the input."
+            }
+        ],
+        "language": [
+            "cpp",
+            "java",
+            "python",
+            "javascript"
+        ],
+        "topicTags": [
+            "Array",
+            "Bit Manipulation"
+        ],
+        "difficulty": "Easy",
+        "similarProblems": [],
+        "frequently_occuring_doubts": [
+            {
+                "answer": "The output array should have one less element than the input array (n - 1) because you're taking pairs (i, i+1).",
+                "question": "What should be the length of the resulting array? "
+            },
+            {
+                "answer": "Yes, it can. Bitwise operations are still valid for negative numbers (though binary representation differs, results still work).",
+                "question": "Can the input array have negative numbers? "
+            }
+        ],
+        "interview_followup_questions": [
+            {
+                "answer": "If the interviewer allows modifying the input array and dropping the last element, yes, but typically it's better to return a new array for clarity.",
+                "question": "Can this be done in-place? "
+            },
+            {
+                "answer": "In that case, you'd also compute nums[n-1] | nums[0] and include it as the last element in the result, making the output length n instead of n - 1",
+                "question": " How would the logic change for a circular array (i.e., wrap around)? "
+            }
+        ]
+    },
+    "inputAndOutputStructure": {
+        "input_structure": [
+            {
+                "type": "array",
+                "label": "nums",
+                "subtype": "integer"
+            }
+        ],
+        "output_structure": {
+            "type": "array"
+        }
+    },
+    "hasGamification": 1,
+    "gamificationOptions": [
+        "[3,6,12]",
+        "[3,6,10]",
+        "[4,5,12]",
+        "[3,2,1]"
+    ],
+    "gamification_ouput": "[3,6,12]",
+    "testcases": [
+        {
+            "inputs": {
+                "nums": "[1,3,7,15]"
+            },
+            "parsedInput": "1\nTestCase-1\n4\n1 3 7 15",
+            "parsedOutput": "TestCase-1\n3 7 15"
+        },
+        {
+            "inputs": {
+                "nums": "[8,4,2]"
+            },
+            "parsedInput": "1\nTestCase-1\n3\n8 4 2",
+            "parsedOutput": "TestCase-1\n12 6"
+        }
+    ],
+    "publicCpp": "class Solution {\npublic:\n    vector<int> orArray(vector<int>& A) {\n       // User code goes here\n    }\n};",
+    "publicJava": "class Solution {\n    public List<Integer> orArray(List<Integer> A) {\n        // User code goes here\n    }\n}",
+    "publicPy": "class Solution:\n    def orArray(self, A):\n        # User code goes here\n",
+    "publicJs": "class Solution {\n    orArray(A) {\n        // User code goes here\n    }\n}",
+    "publicCsharp": "public class Solution {\n    public List<int> OrArray(List<int> nums) {\n       // User code goes here\n    }\n}",
+    "publicGo": "func orArray(A []int) []int {\n\n}"
+}

@@ -1,0 +1,16 @@
+{
+  "name": "take_u_data_converter",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@clearfeed-ai/html-to-mrkdwn-ts": "^2.2.6"
+  }
+}
