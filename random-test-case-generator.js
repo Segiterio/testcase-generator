@@ -48,14 +48,16 @@ class RandomTestCaseGenerator {
   }
 
   // Generate random array of integers
-  randomIntArray(size, min, max, unique = false) {
+  randomIntArray(size, min, max, minLength, maxLength, unique = false) {
     const arr = [];
     const used = new Set();
 
-    for (let i = 0; i < size; i++) {
+    let rangeSize = this.randomInt(minLength, maxLength);
+
+    for (let i = 0; i < rangeSize; i++) {
       let value;
       if (unique) {
-        if (used.size >= max - min + 1) {
+        if (used.rangeSize >= max - min + 1) {
           throw new Error("Cannot generate unique values: range too small");
         }
         do {
@@ -232,6 +234,8 @@ class RandomTestCaseGenerator {
             constraint.size,
             constraint.min,
             constraint.max,
+            constraint.minLength,
+            constraint.maxLength,
             constraint.unique
           );
           break;
@@ -276,6 +280,5 @@ class RandomTestCaseGenerator {
     return testCase;
   }
 }
-
 
 export default RandomTestCaseGenerator;

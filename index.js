@@ -56,7 +56,7 @@ console.log("\n=== Multiple Test Cases ===");
 const simpleConstraints = {
   a: { type: "int", min: 0, max: 100000 },
   b: { type: "int", min: 0, max: 100000 },
-  array: { type: "intArray", size: 5, min: 1, max: 100, unique: true },
+  array: { type: "intArray", size: 5, min: 1, max: 100, unique: true , minLength: 0 , maxLength: 10 },
 };
 
 for (let i = 0; i < 7; i++) {
