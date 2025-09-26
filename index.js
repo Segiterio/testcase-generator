@@ -1,4 +1,6 @@
 import RandomTestCaseGenerator from "./random-test-case-generator.js";
+import express from "express";
+import cors from "cors";
 
 // Usage examples
 const generator = new RandomTestCaseGenerator();
@@ -15,7 +17,7 @@ const generator = new RandomTestCaseGenerator();
 //   generator.randomChoice(["apple", "banana", "cherry"])
 // );
 
-// // Example 2: Complex test case generation
+// Example 2: Complex test case generation
 // console.log("\n=== Complex Test Case Example ===");
 // const constraints = {
 //   n: { type: "int", min: 1, max: 100 },
@@ -56,12 +58,44 @@ console.log("\n=== Multiple Test Cases ===");
 const simpleConstraints = {
   a: { type: "int", min: 0, max: 100000 },
   b: { type: "int", min: 0, max: 100000 },
-  array: { type: "intArray", size: 5, min: 1, max: 100, unique: true , minLength: 0 , maxLength: 10 },
+  array: {
+    type: "intArray",
+    size: 5,
+    min: 1,
+    max: 100,
+    unique: true,
+    minLength: 0,
+    maxLength: 10,
+  },
 };
 
-for (let i = 0; i < 7; i++) {
-  console.log(
-    `Test case ${i + 1}:`,
-    generator.generateTestCase(simpleConstraints)
-  );
-}
+// for (let i = 0; i < 7; i++) {
+//   console.log(
+//     `Test case ${i + 1}:`,
+//     generator.generateTestCase(simpleConstraints)
+//   );
+// }
+
+// Int , string, float, char, array
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.post("/generate-random-array", (req, res) => {
+  try {
+    const data = req.body;
+    console.log(data);
+
+    const newArray = [];
+    for (let i = 0; i < data?.numberOfOutputs; i++) {
+      newArray.push(generator.generateTestCase(data.constraints));
+    }
+    console.log(newArray);
+    res.json({ newArray });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.listen(5000, () => console.log("Server running on http://localhost:5000"));
