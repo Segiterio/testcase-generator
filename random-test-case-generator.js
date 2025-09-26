@@ -48,7 +48,38 @@ class RandomTestCaseGenerator {
   }
 
   // Generate random array of integers
-  randomIntArray(size, min, max, unique = false) {
+  randomIntArray(minLength, maxLength, min, max, unique = false) {
+    if (minLength > maxLength) {
+      throw new Error("minLength cannot be greater than maxLength");
+    }
+
+    // Pick a random array length between minLength and maxLength
+    const size = this.randomInt(minLength, maxLength);
+
+    const arr = [];
+    const used = new Set();
+
+    for (let i = 0; i < size; i++) {
+      let value;
+      if (unique) {
+        if (used.size >= max - min + 1) {
+          throw new Error("Cannot generate unique values: range too small");
+        }
+        do {
+          value = this.randomInt(min, max);
+        } while (used.has(value));
+        used.add(value);
+      } else {
+        value = this.randomInt(min, max);
+      }
+      arr.push(value);
+    }
+
+    return arr;
+  }
+
+  // Generate random array of integers for matrix
+  randomIntArrayMatrix(size, min, max, unique = false) {
     const arr = [];
     const used = new Set();
 
@@ -74,7 +105,7 @@ class RandomTestCaseGenerator {
   randomMatrix(rows, cols, min, max) {
     const matrix = [];
     for (let i = 0; i < rows; i++) {
-      matrix.push(this.randomIntArray(cols, min, max));
+      matrix.push(this.randomIntArrayMatrix(cols, min, max));
     }
     return matrix;
   }
@@ -229,7 +260,9 @@ class RandomTestCaseGenerator {
           break;
         case "intArray":
           testCase[key] = this.randomIntArray(
-            constraint.size,
+            // constraint.size,
+            constraint.minLength,
+            constraint.maxLength,
             constraint.min,
             constraint.max,
             constraint.unique
@@ -276,6 +309,5 @@ class RandomTestCaseGenerator {
     return testCase;
   }
 }
-
 
 export default RandomTestCaseGenerator;

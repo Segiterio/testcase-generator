@@ -11,6 +11,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@clearfeed-ai/html-to-mrkdwn-ts": "^2.2.6"
+    "@clearfeed-ai/html-to-mrkdwn-ts": "^2.2.6",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   }
 }

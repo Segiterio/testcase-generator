@@ -1,4 +1,6 @@
 import RandomTestCaseGenerator from "./random-test-case-generator.js";
+import express from "express";
+import cors from "cors";
 
 // Usage examples
 const generator = new RandomTestCaseGenerator();
@@ -15,7 +17,7 @@ const generator = new RandomTestCaseGenerator();
 //   generator.randomChoice(["apple", "banana", "cherry"])
 // );
 
-// // Example 2: Complex test case generation
+// Example 2: Complex test case generation
 // console.log("\n=== Complex Test Case Example ===");
 // const constraints = {
 //   n: { type: "int", min: 1, max: 100 },
@@ -52,16 +54,49 @@ const generator = new RandomTestCaseGenerator();
 // console.log("Seeded random 1 (repeat):", generator.randomInt(1, 100)); // Should be same as first
 
 // Example 4: Generate multiple test cases
-console.log("\n=== Multiple Test Cases ===");
-const simpleConstraints = {
-  a: { type: "int", min: 0, max: 100000 },
-  b: { type: "int", min: 0, max: 100000 },
-  array: { type: "intArray", size: 5, min: 1, max: 100, unique: true },
-};
+// console.log("\n=== Multiple Test Cases ===");
+// const simpleConstraints = {
+//   a: { type: "int", min: 0, max: 100000 },
+//   b: { type: "int", min: 0, max: 100000 },
+//   array: { type: "intArray", size: 5, min: 1, max: 100, unique: true },
+// };
 
-for (let i = 0; i < 7; i++) {
-  console.log(
-    `Test case ${i + 1}:`,
-    generator.generateTestCase(simpleConstraints)
-  );
-}
+// for (let i = 0; i < 7; i++) {
+//   console.log(
+//     `Test case ${i + 1}:`,
+//     generator.generateTestCase(simpleConstraints)
+//   );
+// }
+
+// Int , string, float, char, array
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+app.post("/generate-random-array", (req, res) => {
+  try {
+    const constraint = req.body;
+    console.log(constraint);
+
+    if (!constraint.type) {
+      return res.status(400).json({ error: "type is required" });
+    }
+
+    // let simpleConstraints = { result: constraint };
+    const numberOfOutputs = constraint.numberOfOutputs || 1;
+
+    const newArray = [];
+    for (let i = 0; i < numberOfOutputs; i++) {
+      newArray.push(generator.generateTestCase(constraint));
+    }
+
+    console.log(newArray);
+
+    res.json({ newArray });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.listen(5000, () => console.log("Server running on http://localhost:5000"));
